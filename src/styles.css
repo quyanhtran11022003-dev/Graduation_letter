@@ -1,3 +1,5 @@
+ @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
+
  :root {
    font-family: var(--font-body);
    color: #201c19;
@@ -572,9 +574,9 @@ button:disabled { opacity:.65; cursor:wait; }
     rgba(255, 250, 235, .64);
   box-shadow: 0 9px 22px rgba(65, 46, 31, .1);
   color: #57392f;
-  font-family: 'Caveat', cursive;
+  font-family: 'Alex Brush', cursive;
   font-size: clamp(21px, 5.5vw, 26px);
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.38;
   text-align: left;
 }
@@ -589,7 +591,7 @@ button:disabled { opacity:.65; cursor:wait; }
   padding-right: 70px;
   color: var(--burgundy);
   font-size: clamp(29px, 7vw, 36px);
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .handwritten-letter .letter-message {

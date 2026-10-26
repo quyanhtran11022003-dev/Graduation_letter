@@ -100,6 +100,7 @@ export default function App() {
   const [celebrating, setCelebrating] = useState(false);
   const [sadReaction, setSadReaction] = useState(false);
   const [reactionKey, setReactionKey] = useState(0);
+  const [activityVersion, setActivityVersion] = useState(0);
   const timerRef = useRef(null);
   const transitionTimerRef = useRef(null);
   const celebrationTimerRef = useRef(null);
@@ -108,6 +109,23 @@ export default function App() {
   const busyRef = useRef(false);
   const mountedRef = useRef(true);
   const audioRef = useRef(null);
+
+  useEffect(() => {
+    const handleUserActivity = () => {
+      setActivityVersion(version => version + 1);
+    };
+    const activityEvents = ['pointerdown', 'keydown', 'touchstart', 'wheel'];
+
+    activityEvents.forEach(eventName => {
+      window.addEventListener(eventName, handleUserActivity, { passive: true });
+    });
+
+    return () => {
+      activityEvents.forEach(eventName => {
+        window.removeEventListener(eventName, handleUserActivity);
+      });
+    };
+  }, []);
 
   useEffect(() => {
     if (celebrating || response || busy || isTransitioning || slide >= 4) {
@@ -127,7 +145,7 @@ export default function App() {
     }, 5000);
 
     return () => clearTimeout(timerRef.current);
-  }, [celebrating, response, busy, isTransitioning, slide]);
+  }, [activityVersion, celebrating, response, busy, isTransitioning, slide]);
 
   useEffect(() => {
     mountedRef.current = true;

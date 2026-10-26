@@ -178,6 +178,13 @@ export default function App() {
     }, reducedMotion ? 0 : 360);
   }
 
+  function handleSlideTap(event) {
+    if (event.target instanceof Element && event.target.closest('button, a, input, select, textarea, [role="button"]')) {
+      return;
+    }
+    changeSlide(slide + 1);
+  }
+
   async function playCelebrationAudio() {
     try {
       const asset = await fetch('/sounds/cheer.mp3', { method: 'HEAD' });
@@ -365,7 +372,7 @@ export default function App() {
       </div>
 
 
-      <div className="slides-viewport">
+      <div className="slides-viewport" onClick={handleSlideTap}>
         <section key={slide} className={`slide-content slide-enter ${isTransitioning ? 'is-exiting' : ''}`}>
 
             {slide === 0 && (
